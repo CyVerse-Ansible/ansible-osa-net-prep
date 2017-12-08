@@ -1,0 +1,26 @@
+---
+
+- name: 'interfaces.d directory created'
+  file:
+    path: "{{ network_interface_path }}"
+    state: directory
+
+- name: 'interfaces file templated'
+  template:
+    src: all_interfaces.j2
+    dest: "{{ network_all_interfaces_path }}"
+    backup: yes
+
+- name: 'interfaces.d interfaces file templated'
+  template:
+    src: eth.j2
+    dest: "{{ network_interface_path }}/device-eth"
+
+- name: 'interfaces.d bridges file templated'
+  template:
+    src: bridges.j2
+    dest: "{{ network_interface_path }}/device-bridges"
+
+- name: 'interfaces bounced'
+  shell: ifdown -a && ifup -a
+  tags: restart-networking

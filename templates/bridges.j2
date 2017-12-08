@@ -1,0 +1,44 @@
+# {{ ansible_managed }}
+
+# Container management bridge
+auto br-mgmt
+iface br-mgmt inet static
+  bridge_stp off
+  bridge_waitport 0
+  bridge_fd 0
+  # Bridge port references tagged interface
+  bridge_ports {{ device1 }}.{{ container_vlan_id }}
+  address {{ container_mgt_subnet_1st3o }}.{{ host_ip.split('.')[3] }}
+  netmask {{ container_mgt_netmask }}
+  dns-nameservers {{ dns_servers }}
+
+# Storage bridge (optional)
+auto br-storage
+iface br-storage inet static
+  bridge_stp off
+  bridge_waitport 0
+  bridge_fd 0
+  # Bridge port reference tagged interface
+  bridge_ports {{ device1 }}.{{ storage_vlan_id }}
+  address {{ storage_subnet_1st3o }}.{{ host_ip.split('.')[3] }}
+  netmask {{ storage_netmask }}
+
+# OpenStack Networking VXLAN (tunnel/overlay) bridge
+auto br-vxlan
+iface br-vxlan inet static
+  bridge_stp off
+  bridge_waitport 0
+  bridge_fd 0
+  # Bridge port references tagged interface
+  bridge_ports {{ device2 }}.{{ tunnel_vlan_id }}
+  address {{ tunnel_subnet_1st3o }}.{{ host_ip.split('.')[3] }}
+  netmask {{ tunnel_netmask }}
+
+# OpenStack Networking VLAN bridge
+auto br-vlan
+  iface br-vlan inet manual
+  bridge_stp off
+  bridge_waitport 0
+  bridge_fd 0
+  # Bridge port references untagged interface
+  bridge_ports {{ device2 }}

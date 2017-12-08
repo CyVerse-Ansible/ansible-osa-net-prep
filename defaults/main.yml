@@ -1,0 +1,10 @@
+---
+
+device1_mtu: 1500
+device2_mtu: 1500
+
+host_mgt_vlan_tagged: false
+
+# TODO are these needed?
+network_all_interfaces_path: "/etc/network/interfaces"
+network_interface_path: "/etc/network/interfaces.d"
