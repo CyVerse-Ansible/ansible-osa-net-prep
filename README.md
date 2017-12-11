@@ -69,11 +69,11 @@ Including an example of how to use your role (for instance, with variables passe
         storage_vlan_id: 13
         host_mgt_netmask: 255.255.255.0
         host_mgt_broadcast: 192.168.0.255
-        host_mgt_network: 192.168.0.0
+        host_mgt_network_prefix: 192.168.0.0
         host_mgt_gateway: 192.168.0.1
-        container_mgt_subnet_prefix: 172.29.224
-        tunnel_subnet_prefix: 172.29.228
-        storage_subnet_prefix: 172.29.232
+        container_mgt_subnet_1st3o: 172.29.224
+        tunnel_subnet_1st3o: 172.29.228
+        storage_subnet_1st3o: 172.29.232
         container_mgt_netmask: 255.255.252.0
         tunnel_netmask: 255.255.252.0
         storage_netmask: 255.255.252.0
