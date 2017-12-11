@@ -5,6 +5,7 @@ iface {{ device1 }} inet manual
   mtu {{ device1_mtu }}
 
 auto {{ device1 }}{% if host_mgt_vlan_tagged|bool %}.{{ host_mgt_vlan_id }}{% endif %}
+
 iface {{ device1 }}{% if host_mgt_vlan_tagged|bool %}.{{ host_mgt_vlan_id }}{% endif %} inet static
   address {{ host_ip }}
   description management interface
@@ -15,18 +16,16 @@ iface {{ device1 }}{% if host_mgt_vlan_tagged|bool %}.{{ host_mgt_vlan_id }}{% e
   dns-nameservers {{ dns_servers }}
   dns-search {{ dns_search }}
   {% if host_mgt_vlan_tagged|bool %}vlan_id {{ host_mgt_vlan_id }}{% endif %}
+
   {% if host_mgt_vlan_tagged|bool %}vlan-raw-device {{ device1 }}{% endif %}
-  mtu {{ device1_mtu }}
 
 auto {{ device1 }}.{{ container_mgt_vlan_id }}
 iface {{ device1 }}.{{ container_mgt_vlan_id }} inet manual
   vlan-raw-device {{ device1 }}
-  mtu {{ device1_mtu }}
 
 auto {{ device1 }}.{{ storage_vlan_id }}
 iface {{ device1 }}.{{ storage_vlan_id }} inet manual
   vlan-raw-device {{ device1 }}
-  mtu {{ device1_mtu }}
 
 auto {{ device2 }}
 iface {{ device2 }} inet manual
@@ -37,4 +36,3 @@ iface {{ device2 }} inet manual
 auto {{ device2 }}.{{ tunnel_vlan_id }}
 iface {{ device2 }}.{{ tunnel_vlan_id }} inet manual
   vlan-raw-device {{ device2 }}
-  mtu {{ device2_mtu }}

@@ -1,5 +1,10 @@
 ---
 
+- name: 'dependencies installed'
+  apt:
+    name: 'bridge-utils'
+    state: 'installed'
+
 - name: 'interfaces.d directory created'
   file:
     path: "{{ network_interface_path }}"
